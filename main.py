@@ -75,9 +75,13 @@ def author_operations():
         author = Author(name, biography)
         author_list.append(author)
     elif choice == 2:
-        pass
+        for author in author_list:
+            print(
+                f"Author's name is {author.get_name()} and Biography: {author.get_biography()}"
+            )
     elif choice == 3:
-        pass
+        for i in range(len(author_list)):
+            print(f"{i+1}. {author_list[i].get_name()}")
     else:
         print("Invalid choice. Please choose a valid option.")
         return
