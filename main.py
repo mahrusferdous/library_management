@@ -17,7 +17,7 @@ def handle_choice():
 
 def book_operations():
     print(
-        "Book Operations:\n1. Add a new book\n2. Borrow a boon\n3. Return a book\n4. Search for a book\n5. Display all books"
+        "\nBook Operations:\n1. Add a new book\n2. Borrow a boon\n3. Return a book\n4. Search for a book\n5. Display all books"
     )
     if handle_choice() == 1:
         pass
@@ -36,7 +36,7 @@ def book_operations():
 
 def user_operations():
     print(
-        "User Operations:\n1. Add a new user\n2. View user details\n3.Display all users"
+        "\nUser Operations:\n1. Add a new user\n2. View user details\n3.Display all users"
     )
     if handle_choice() == 1:
         pass
@@ -51,7 +51,7 @@ def user_operations():
 
 def author_operations():
     print(
-        "Author Operations:\n1. Add a new author\n2. View author details\n3. Display all authors"
+        "\nsAuthor Operations:\n1. Add a new author\n2. View author details\n3. Display all authors"
     )
     if handle_choice() == 1:
         pass
@@ -64,10 +64,10 @@ def author_operations():
         return
 
 
+print("\nWelcome to the Library Management System!")
 while True:
-    print("Welcome to the Library Management System!")
     print(
-        "Main Menu\n1. Book Operations\n2. User Operations\n3. Author Operations\n4. Quit"
+        "\nMain Menu\n1. Book Operations\n2. User Operations\n3. Author Operations\n4. Quit"
     )
     choice = handle_choice()
     if choice == 1:

@@ -20,4 +20,8 @@ class User:
         self.borrowed_book.append(borrowed_book)
 
     def display_borrowed_books(self):
-        return self.borrowed_book
+        if len(self.borrowed_book) == 0:
+            print("No books borrowed.")
+        else:
+            for book in self.borrowed_book:
+                print(book)
