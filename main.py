@@ -13,13 +13,14 @@ class Main:
             print(
                 "Main Menu\n1. Book Operations\n2. User Operations\n3. Author Operations\n4. Quit"
             )
-            if self.handle_choice() == 1:
+            choice = self.handle_choice()
+            if choice == 1:
                 self.book_operations()
-            elif self.handle_choice() == 2:
+            elif choice == 2:
                 self.user_operations()
-            elif self.handle_choice() == 3:
+            elif choice == 3:
                 self.author_operations()
-            elif self.handle_choice() == 4:
+            elif choice == 4:
                 print("Thank you for using the Library Management System!")
                 break
             else:
