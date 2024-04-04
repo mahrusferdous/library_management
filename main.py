@@ -2,6 +2,12 @@ from book_categories import Book_Categories
 from user import User
 from author import Author
 
+user_list = []
+book_list = []
+author_list = []
+
+# all_list = [user_list, book_list, author_list]
+
 
 def handle_choice():
     try:
@@ -15,49 +21,60 @@ def handle_choice():
         return
 
 
+# Book
 def book_operations():
     print(
         "\nBook Operations:\n1. Add a new book\n2. Borrow a boon\n3. Return a book\n4. Search for a book\n5. Display all books"
     )
-    if handle_choice() == 1:
+    choice = handle_choice()
+    if choice == 1:
         pass
-    elif handle_choice() == 2:
+    elif choice == 2:
         pass
-    elif handle_choice() == 3:
+    elif choice == 3:
         pass
-    elif handle_choice() == 4:
+    elif choice == 4:
         pass
-    elif handle_choice() == 5:
+    elif choice == 5:
         pass
     else:
         print("Invalid choice. Please choose a valid option.")
         return
 
 
+# User
 def user_operations():
     print(
-        "\nUser Operations:\n1. Add a new user\n2. View user details\n3.Display all users"
+        "\nUser Operations:\n1. Add a new user\n2. View user details\n3. Display all users"
     )
-    if handle_choice() == 1:
+    choice = handle_choice()
+    if choice == 1:
+        library_id = 0
+        name = input("Enter the name of the user: ")
+        library_id += 1
+        user = User(name, library_id)
+        user_list.append(user)
+    elif choice == 2:
         pass
-    elif handle_choice() == 2:
-        pass
-    elif handle_choice() == 3:
-        pass
+    elif choice == 3:
+        for user in user_list:
+            print(user.get_name())
     else:
         print("Invalid choice. Please choose a valid option.")
         return
 
 
+# Author
 def author_operations():
     print(
         "\nsAuthor Operations:\n1. Add a new author\n2. View author details\n3. Display all authors"
     )
-    if handle_choice() == 1:
+    choice = handle_choice()
+    if choice == 1:
         pass
-    elif handle_choice() == 2:
+    elif choice == 2:
         pass
-    elif handle_choice() == 3:
+    elif choice == 3:
         pass
     else:
         print("Invalid choice. Please choose a valid option.")
