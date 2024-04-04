@@ -21,7 +21,7 @@ class User:
 
     def display_borrowed_books(self):
         if len(self.borrowed_book) == 0:
-            print("No books borrowed.")
+            print(f"No books borrowed. by {self.__name}")
         else:
             for book in self.borrowed_book:
-                print(book)
+                print(f"{self.__name} borrowed {book}")

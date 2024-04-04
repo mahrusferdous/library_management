@@ -6,8 +6,6 @@ user_list = []
 book_list = []
 author_list = []
 
-# all_list = [user_list, book_list, author_list]
-
 
 def handle_choice():
     try:
@@ -55,10 +53,11 @@ def user_operations():
         user = User(name, library_id)
         user_list.append(user)
     elif choice == 2:
-        pass
-    elif choice == 3:
         for user in user_list:
-            print(user.get_name())
+            print(user.display_borrowed_books())
+    elif choice == 3:
+        for i in range(len(user_list)):
+            print(f"{i+1}. {user_list[i].get_name()}")
     else:
         print("Invalid choice. Please choose a valid option.")
         return
@@ -71,7 +70,10 @@ def author_operations():
     )
     choice = handle_choice()
     if choice == 1:
-        pass
+        name = input("Enter the name of the user: ")
+        biography = input("Write a little bit about the author: ")
+        author = Author(name, biography)
+        author_list.append(author)
     elif choice == 2:
         pass
     elif choice == 3:
@@ -81,6 +83,7 @@ def author_operations():
         return
 
 
+# Main functionality
 print("\nWelcome to the Library Management System!")
 while True:
     print(
