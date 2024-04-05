@@ -21,6 +21,8 @@ book2 = Book_Categories(
 
 user1 = User("Tom Cat", 1)
 user2 = User("Jerry Mouse", 2)
+user1.set_borrowed_book(book1)
+user2.set_borrowed_book(book2)
 
 author1 = Author(
     "Paulo Coelho",
@@ -97,7 +99,19 @@ def book_operations():
                 return
 
     elif choice == 3:
-        pass
+        print()
+        try:
+            book = input("Enter the title of the book you want to return: ")
+            for name in user_list:
+                for borrowed in name.get_borrowed_book():
+                    if book == borrowed.get_title():
+                        print(f"{book} returned.")
+                        name.display_borrowed_books()
+
+        except Exception as e:
+            print(e)
+            return
+
     elif choice == 4:
         book = input("Enter the title of the book you want to search for: ")
         for i in range(len(book_list)):
@@ -111,6 +125,9 @@ def book_operations():
     elif choice == 5:
         for i in range(len(book_list)):
             print(f"{i+1}. {book_list[i].get_title()}")
+        for book in user_list:
+            book.display_borrowed_books()
+
     else:
         print("Invalid choice. Please choose a valid option.")
         return
