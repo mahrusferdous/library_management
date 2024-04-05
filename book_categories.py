@@ -2,8 +2,8 @@ from book import Book
 
 
 class Book_Categories(Book):
-    def __init__(self, title, author, ISBN, genre, publication_date, availability):
-        super().__init__(title, author, ISBN, genre, publication_date, availability)
+    def __init__(self, title, author, ISBN, genre, publication_date):
+        super().__init__(title, author, ISBN, genre, publication_date)
         self.categories = "n/a"
 
     def choose_category(self):
@@ -17,11 +17,11 @@ class Book_Categories(Book):
             print(e)
             return
 
-        if category == "1":
+        if category == 1:
             self.categories = "Fiction"
-        elif category == "2":
+        elif category == 2:
             self.categories = "Non-fiction"
-        elif category == "3":
+        elif category == 3:
             self.categories = "Mystery"
         else:
             print("Invalid choice. Please choose a valid category.")

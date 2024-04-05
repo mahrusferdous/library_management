@@ -1,11 +1,11 @@
 class Book:
-    def __init__(self, title, author, ISBN, genre, publication_date, availability):
+    def __init__(self, title, author, ISBN, genre, publication_date):
         self.__title = title
         self.__author = author
         self.__ISBN = ISBN
         self.__genre = genre
         self.__publication_date = publication_date
-        self.__availability = availability
+        self.__availability = True
 
     def get_title(self):
         return self.__title
@@ -38,7 +38,13 @@ class Book:
         self.__publication_date = publication_date
 
     def get_availability(self):
-        return self.__availability
+        return self.get_availability
 
-    def set_availability(self, availability):
-        self.__availability = availability
+    def return_book(self):
+        self.__availability = True
+
+    def borrow_book(self):
+        if self.__availability:
+            print(f"You succesfully checked out {self.__title}")
+            self.__availability = False
+        print(f"{self.__title} is not available")
