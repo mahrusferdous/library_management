@@ -9,7 +9,6 @@ book1 = Book_Categories(
     "Action and Adventure",
     "April 25, 2006",
     "Available",
-    "Fiction",
 )
 book2 = Book_Categories(
     "The Great Gatsby",
@@ -18,20 +17,16 @@ book2 = Book_Categories(
     "Action and Adventure",
     "September 30, 2004",
     "Available",
-    "Fiction",
 )
+
 user1 = User("Tom Cat", 1)
 user2 = User("Jerry Mouse", 2)
+
 author1 = Author(
-    "The Alchemist",
     "Paulo Coelho",
     "Paulo Coelho was born in Rio de Janeiro, Brazil, in 1947.",
 )
-author2 = Author(
-    "The Great Gatsby",
-    "F. Scott Fitzgerald",
-    "F. Scott Fitzgerald was born in St. Paul, Minnesota, in 1896.",
-)
+author2 = Author("F. Scott Fitzgerald", "F. Scott Fitzgerald was born in 1896.")
 
 book_list = [book1, book2]
 user_list = [user1, user2]
@@ -68,8 +63,39 @@ def book_operations():
         )
         book.choose_category()
         book_list.append(book)
+
     elif choice == 2:
-        pass
+        print()
+        # Display all books
+        for i in range(len(book_list)):
+            print(f"{i+1}. {book_list[i].get_title()}")
+        # Input
+        try:
+            book_num = int(
+                input("Enter the title number of the book you want to borrow: ")
+            )
+            user = input("Enter your name: ")
+        except ValueError:
+            print("Invalid choice. Please choose a valid option.")
+            return
+        except Exception as e:
+            print(e)
+            return
+        # Functionality to borrow a book
+        for book in book_list:
+            if (
+                book_list[book_num - 1].get_title() is book.get_title()
+                and book.get_availability() == "Available"
+            ):
+                for name in user_list:
+                    if user == name.get_name():
+                        name.borrow_book(book)
+                        book.set_availability("Not Available")
+                        print(f"{user} has borrowed {book.get_title()}.")
+            else:
+                print("Book not found.")
+                return
+
     elif choice == 3:
         pass
     elif choice == 4:
@@ -81,6 +107,7 @@ def book_operations():
                 )
             else:
                 print("Book not found.")
+
     elif choice == 5:
         for i in range(len(book_list)):
             print(f"{i+1}. {book_list[i].get_title()}")
