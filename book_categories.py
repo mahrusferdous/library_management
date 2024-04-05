@@ -2,11 +2,9 @@ from book import Book
 
 
 class Book_Categories(Book):
-    def __init__(
-        self, title, author, ISBN, genre, publication_date, availability, categories
-    ):
+    def __init__(self, title, author, ISBN, genre, publication_date, availability):
         super().__init__(title, author, ISBN, genre, publication_date, availability)
-        self.categories = categories
+        self.categories = "n/a"
 
     def choose_category(self):
         print("1. Fiction\n2. Non-fiction\n3. Mystery\n")

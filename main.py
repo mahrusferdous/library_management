@@ -2,9 +2,40 @@ from book_categories import Book_Categories
 from user import User
 from author import Author
 
-user_list = []
-book_list = []
-author_list = []
+book1 = Book_Categories(
+    "The Alchemist",
+    "Paulo Coelho",
+    "9780062315007",
+    "Action and Adventure",
+    "April 25, 2006",
+    "Available",
+    "Fiction",
+)
+book2 = Book_Categories(
+    "The Great Gatsby",
+    "F. Scott Fitzgerald",
+    "9780743273565",
+    "Action and Adventure",
+    "September 30, 2004",
+    "Available",
+    "Fiction",
+)
+user1 = User("Tom Cat", 1)
+user2 = User("Jerry Mouse", 2)
+author1 = Author(
+    "The Alchemist",
+    "Paulo Coelho",
+    "Paulo Coelho was born in Rio de Janeiro, Brazil, in 1947.",
+)
+author2 = Author(
+    "The Great Gatsby",
+    "F. Scott Fitzgerald",
+    "F. Scott Fitzgerald was born in St. Paul, Minnesota, in 1896.",
+)
+
+book_list = [book1, book2]
+user_list = [user1, user2]
+author_list = [author1, author2]
 
 
 def handle_choice():
@@ -22,19 +53,37 @@ def handle_choice():
 # Book
 def book_operations():
     print(
-        "\nBook Operations:\n1. Add a new book\n2. Borrow a boon\n3. Return a book\n4. Search for a book\n5. Display all books"
+        "\nBook Operations:\n1. Add a new book\n2. Borrow a book\n3. Return a book\n4. Search for a book\n5. Display all books"
     )
     choice = handle_choice()
     if choice == 1:
-        pass
+        title = input("Enter the title of the book: ")
+        author = input("Enter the author of the book: ")
+        ISBN = input("Enter the ISBN of the book: ")
+        genre = input("Enter the genre of the book: ")
+        publication_date = input("Enter the publication date of the book: ")
+        availability = input("Enter the availability of the book: ")
+        book = Book_Categories(
+            title, author, ISBN, genre, publication_date, availability
+        )
+        book.choose_category()
+        book_list.append(book)
     elif choice == 2:
         pass
     elif choice == 3:
         pass
     elif choice == 4:
-        pass
+        book = input("Enter the title of the book you want to search for: ")
+        for i in range(len(book_list)):
+            if book in book_list[i].get_title():
+                print(
+                    f"Book title: {book_list[i].get_title()}\nAuthor: {book_list[i].get_author()}\nISBN: {book_list[i].get_ISBN()}\nGenre: {book_list[i].get_genre()}\nPublication Date: {book_list[i].get_publication_date()}\nAvailability: {book_list[i].get_availability()}\nCategory: {book_list[i].get_categories()}"
+                )
+            else:
+                print("Book not found.")
     elif choice == 5:
-        pass
+        for i in range(len(book_list)):
+            print(f"{i+1}. {book_list[i].get_title()}")
     else:
         print("Invalid choice. Please choose a valid option.")
         return
