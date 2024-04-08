@@ -3,6 +3,8 @@ from user import User
 from author import Author
 from book import Book
 
+books = {}
+
 book1 = Book(
     "The Alchemist",
     "Paulo Coelho",
@@ -25,10 +27,12 @@ book3 = Book(
     "September 30, 2004",
 )
 
+
 user1 = User("Tom Cat", 1)
 user2 = User("Jerry Mouse", 2)
 user1.set_borrowed_book(book1)
-user2.set_borrowed_book(book2)
+user1.set_borrowed_book(book2)
+
 
 author1 = Author(
     "Paulo Coelho",
@@ -36,9 +40,9 @@ author1 = Author(
 )
 author2 = Author("F. Scott Fitzgerald", "F. Scott Fitzgerald was born in 1896.")
 
-book_list = [book1, book2, book3]
 user_list = [user1, user2]
 author_list = [author1, author2]
+books = [book1, book2, book3]
 
 
 def handle_choice():
@@ -67,14 +71,14 @@ def book_operations():
         publication_date = input("Enter the publication date of the book: ")
         book = Book(title, author, ISBN, genre, publication_date)
         #       book.choose_category()
-        book_list.append(book)
+        books.append(book)
 
     elif choice == 2:
         print()
         # Display all books
-        for i in range(len(book_list)):
-            if book_list[i].get_availability():
-                print(f"{i+1}. {book_list[i].get_title()}")
+        for i in range(len(books)):
+            if books[i].get_availability():
+                print(f"{i+1}. {books[i].get_title()}")
         # Input
         try:
             book_num = int(
@@ -88,21 +92,30 @@ def book_operations():
             print(e)
             return
         # Functionality to borrow a book
-        for book in book_list:
-            if book_list[book_num - 1].get_title() == book.get_title():
-                book.borrow_book(book)
+        for name in user_list:
+            for book in books:
+                if books[book_num - 1].get_title() == book.get_title():
+                    name.set_borrowed_book(book)
+                    book.borrow_book(book)
 
     elif choice == 3:
         print()
         try:
-            book = input("Enter the title of the book you want to return: ")
-            for name in user_list:
-                for borrowed in name.get_borrowed_book():
-                    if book == borrowed.get_title():
-                        print(f"{book} returned.")
-                        borrowed.return_book()
-                        name.display_borrowed_books()
-                        user_list.remove(name)
+            user_name = input("Enter your name: ")
+            in_book = input("Enter the title of the book you want to return: ")
+
+            user = None
+            for user_obj in user_list:
+                if user_name == user_obj.get_name():
+                    user = user_obj
+                    break
+
+            if user:
+                for borrowed_book in user.get_borrowed_book():
+                    if borrowed_book.get_title() == in_book:
+                        user.remove_borrowed_book(borrowed_book)
+                        borrowed_book.return_book()
+                        break
 
         except Exception as e:
             print(e)
@@ -110,21 +123,19 @@ def book_operations():
 
     elif choice == 4:
         book = input("Enter the title of the book you want to search for: ")
-        for i in range(len(book_list)):
-            if book == book_list[i].get_title():
+        print()
+        for i in range(len(books)):
+            if book == books[i].get_title():
                 print(
-                    f"Book title: {book_list[i].get_title()}\nAuthor: {book_list[i].get_author()}\nISBN: {book_list[i].get_ISBN()}\nGenre: {book_list[i].get_genre()}\nPublication Date: {book_list[i].get_publication_date()}"
+                    f"Book title: {books[i].get_title()}\nAuthor: {books[i].get_author()}\nISBN: {books[i].get_ISBN()}\nGenre: {books[i].get_genre()}\nPublication Date: {books[i].get_publication_date()}"
                 )
                 return
-            else:
-                print("Book not found.")
-                return
+        print("Book not found.")
 
     elif choice == 5:
         print()
-        for i in range(len(book_list)):
-            print(f"{i+1}. {book_list[i].get_title()}")
-        print()
+        for i in range(len(books)):
+            print(f"{i}. {books[i].get_title()}")
         for book in user_list:
             book.display_borrowed_books()
 
@@ -147,7 +158,7 @@ def user_operations():
         user_list.append(user)
     elif choice == 2:
         for user in user_list:
-            print(user.display_borrowed_books())
+            user.display_borrowed_books()
     elif choice == 3:
         for i in range(len(user_list)):
             print(f"{i+1}. {user_list[i].get_name()}")
@@ -172,7 +183,6 @@ def author_operations():
             print(
                 f"Author's name is {author.get_name()} and Biography: {author.get_biography()}"
             )
-            return
     elif choice == 3:
         for i in range(len(author_list)):
             print(f"{i+1}. {author_list[i].get_name()}")

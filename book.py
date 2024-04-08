@@ -45,6 +45,4 @@ class Book:
 
     def borrow_book(self):
         if self.__availability:
-            print(f"You succesfully checked out {self.__title}")
             self.__availability = False
-        print(f"{self.__title} is not available")
