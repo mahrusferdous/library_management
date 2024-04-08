@@ -84,26 +84,32 @@ def book_operations():
             book_num = int(
                 input("Enter the title number of the book you want to borrow: ")
             )
-            user = input("Enter your name: ")
+            user_name = input("Enter your name: ")
         except ValueError:
             print("Invalid choice. Please choose a valid option.")
             return
         except Exception as e:
             print(e)
             return
-        # Functionality to borrow a book
-        for name in user_list:
-            for book in books:
-                if books[book_num - 1].get_title() == book.get_title():
-                    name.set_borrowed_book(book)
-                    book.borrow_book(book)
 
+        # if book available
+        if books[book_num - 1].get_availability():
+            # if user exists
+            user = None
+            for user_obj in user_list:
+                if user_name == user_obj.get_name():
+                    user = user_obj
+                    break
+        # borrow book
+        if user:
+            user.set_borrowed_book(books[book_num - 1])
+            books[book_num - 1].borrow_book()
     elif choice == 3:
         print()
         try:
-            user_name = input("Enter your name: ")
-            in_book = input("Enter the title of the book you want to return: ")
 
+            in_book = input("Enter the title of the book you want to return: ")
+            user_name = input("Enter your name: ")
             user = None
             for user_obj in user_list:
                 if user_name == user_obj.get_name():
