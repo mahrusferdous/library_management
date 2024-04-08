@@ -141,7 +141,7 @@ def book_operations():
     elif choice == 5:
         print()
         for i in range(len(books)):
-            print(f"{i}. {books[i].get_title()}")
+            print(f"{i+1}. {books[i].get_title()}")
         for book in user_list:
             book.display_borrowed_books()
 
